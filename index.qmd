@@ -5,7 +5,7 @@ about:
   template: trestles
   links:
     - icon: linkedin
-      href: https://www.linkedin.com/in/lourenco-xavier
+      href: https://www.linkedin.com/in/lourenço-xavier
     - icon: envelope
       href: "mailto:lourencoeluisa@gmail.com"
 format:
@@ -16,7 +16,7 @@ format:
 
 ![The Little Prince, first edition — Image © Antoine de Saint-Exupéry estate](media_pics/the-little-prince-antoine-de-saint-exupery-first-edition-rare.webp){width=250px fig-align="center"}
 
-# Lourenço Xavier
+# Hello there.
 
 Welcome to my personal website.
 

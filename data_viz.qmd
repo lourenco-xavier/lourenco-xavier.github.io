@@ -1,6 +1,6 @@
 ---
-title: "data_viz"
+title: "Data visualization"
 format: html
 ---
 
-Here are some **data visualizations** I work on.
+Here are some **data visualizations** examplars I've worked on.

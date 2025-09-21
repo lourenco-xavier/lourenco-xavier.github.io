@@ -14,4 +14,4 @@ Anything with cod!
 
 I will let you guess this one.
 
-![Yosemite, 2024](media_pics/yosemite.png){fig-align="center" width="400"}
+![](media_pics/yosemite.png){fig-align="center" width="400"}

@@ -1,22 +1,21 @@
 project:
   type: website
   output-dir: docs
-website:
-  title: "lourenco-xavier.github.io"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-      - data_viz.qmd
+
+title: "Lourenço Xavier"
+navbar:
+  left:
+    - text: Home
+      href: index.html
+    - text: About
+      href: about.html
+    - text: Data Visualization
+      href: data_viz.html
 
 format:
   html:
     theme: minty
-      
-      
     css: styles.css
     toc: true
 
 editor: visual
-
