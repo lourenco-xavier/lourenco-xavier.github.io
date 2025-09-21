@@ -2,8 +2,16 @@
 title: "About"
 ---
 
-About this site
+**What languages do you speak?**
 
-```{r}
-1 + 1
-```
+Portuguese, English and Spanish.
+
+**What's your favorite dish?**
+
+Anything with cod!
+
+**What is your favorite national park?**
+
+I will let you guess this one.
+
+![Yosemite, 2024](media_pics/yosemite.png){fig-align="center" width="400"}
