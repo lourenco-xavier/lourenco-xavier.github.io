@@ -2,13 +2,16 @@ project:
   type: website
   output-dir: docs
 
-title: "Lourenço Xavier"
-navbar:
-  left:
-    - href: index.qmd
-      text: Home
-    - about.qmd
-    - data_viz.qmd
+website:
+  title: "Lourenço Xavier"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: data_viz.qmd
+        text: Data Visualization
 
 format:
   html:
