@@ -5,12 +5,10 @@ project:
 title: "Lourenço Xavier"
 navbar:
   left:
-    - text: Home
-      href: index.html
-    - text: About
-      href: about.html
-    - text: Data Visualization
-      href: data_viz.html
+    - href: index.qmd
+      text: Home
+    - about.qmd
+    - data_viz.qmd
 
 format:
   html:

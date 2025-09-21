@@ -3,4 +3,4 @@ title: "Data visualization"
 format: html
 ---
 
-Here are some **data visualizations** examplars I've worked on.
+Here are some **data visualizations** exemplars I've worked on.
