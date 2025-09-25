@@ -14,6 +14,9 @@ website:
         menu:
           - text: "Erasmus receiving cities"
             href: erasmus_destinations.qmd
+          - text: "Eurovision points per country"
+            href: eurovision.qmd
+
 
 format:
   html:

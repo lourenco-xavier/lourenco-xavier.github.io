@@ -1,0 +1,57 @@
+---
+title: "Total points by Eurovision participating country (TidyTuesday 2022-03-08)"
+description: |
+  Count of total votes per participating country,
+author: Lourenço Xavier
+date: 25 September, 2025
+format: html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[Source: TidyTuesday (week 2022-05-17)](https://github.com/rfordatascience/tidytuesday)  
+*Original data: The country to country voting data comes from Data.World*
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+eurovision <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2022/2022-05-17/eurovision.csv')
+
+count_points <- eurovision |>
+  group_by(artist_country) |>
+  summarise(total_points = sum(total_points, na.rm = TRUE), .groups = "drop") |>
+  arrange(desc(total_points)) |>
+  slice_head(n = 15)
+
+ggplot(count_points, aes(x = reorder(artist_country, total_points), y = total_points)) +
+  geom_point(size = 4, color = "darkgreen") +
+  geom_segment(aes(x = artist_country, xend = artist_country,
+                   y = 0, yend = total_points), color = "darkgreen") +
+  coord_flip() +
+  labs(x = "Country", y = "Total Votes",
+       title = "Eurovision total votes by participating country (1956 to 2022)")
+
+
+```
+
+
+```{r}
+share_points <- eurovision |>
+  group_by(artist_country) |>
+  summarise(total_points = sum(total_points, na.rm = TRUE), .groups = "drop")
+
+share_points <- share_points |>
+  mutate(perc_share = total_points / sum(total_points) * 100) |>
+  arrange(desc(perc_share))|> 
+  slice_head(n=20)
+ggplot(share_points, aes(x = reorder(artist_country, perc_share), y = perc_share)) +
+  geom_col(fill = "darkgreen") +
+  coord_flip() +
+  labs(x = "Country",
+       y = "Share of Total Votes (%)",
+       title = "Countries by Share of Eurovision Votes (1956–2022)")
+```
