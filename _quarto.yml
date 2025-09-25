@@ -10,8 +10,10 @@ website:
         text: Home
       - href: about.qmd
         text: About
-      - href: data_viz.qmd
-        text: Data Visualization
+      - text: "Data Visualization"
+        menu:
+          - text: "Erasmus receiving cities"
+            href: erasmus_destinations.qmd
 
 format:
   html:

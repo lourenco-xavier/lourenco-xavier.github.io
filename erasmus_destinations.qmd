@@ -1,0 +1,35 @@
+---
+title: "Erasmus Mobility (TidyTuesday 2022-03-08)"
+description: |
+  Analysis of Erasmus mobility data from TidyTuesday.
+author: Lourenço Xavier
+date: 25 September, 2025
+format: html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+[Source: TidyTuesday (week 2022-03-08)](https://github.com/rfordatascience/tidytuesday)  
+*Original data: Erasmus+ mobility stats (sourced from Data.Europa).*
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+erasmus <- read_csv(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-03-08/erasmus.csv"
+)
+
+top_receive <- erasmus |>
+  count(receiving_city, name = "n") |>
+  arrange(desc(n))|>
+  slice_head(n=15)
+
+  ggplot(top_receive, aes(x = reorder(receiving_city, n), y = n,)) +
+  geom_col(fill="navy") +
+  coord_flip() +
+  labs(x = "City", y = "Number of Students",
+       title = "Top 15 Erasmus Receiving Cities in 2022")
+
+```
