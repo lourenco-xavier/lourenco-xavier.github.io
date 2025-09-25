@@ -8,13 +8,16 @@ about:
       href: https://www.linkedin.com/in/lourenço-xavier
     - icon: envelope
       href: "mailto:lourencoeluisa@gmail.com"
+    - icon: github
+      href: https://github.com/lourenco-xavier/lourenco-xavier.github.io
+
 format:
   html:
     theme: jolla
     css: styles.css
 ---
 
-![The Little Prince, first edition — Image © Antoine de Saint-Exupéry estate](media_pics/the-little-prince-antoine-de-saint-exupery-first-edition-rare.webp){width=250px fig-align="center"}
+![The Little Prince, first edition — Image © Antoine de Saint-Exupéry estate](media_pics/the-little-prince-antoine-de-saint-exupery-first-edition-rare.webp){width="250px" fig-align="center"}
 
 # Hello there.
 
