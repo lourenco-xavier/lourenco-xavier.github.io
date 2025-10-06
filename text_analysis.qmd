@@ -1,0 +1,6 @@
+---
+title: "text_analysis"
+format: html
+---
+
+Here are some of my text analysis, and the insights I gained from them.
