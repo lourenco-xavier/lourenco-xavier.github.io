@@ -1,7 +1,3 @@
-project:
-  type: website
-  output-dir: docs
-
 website:
   title: "Lourenço Xavier"
   navbar:
@@ -16,12 +12,12 @@ website:
             href: erasmus_destinations.qmd
           - text: "Eurovision points per country"
             href: eurovision.qmd
-
+      - text: "Text Analysis"
+        menu:
+          - text: "New York Times headlines"
+            href: newyorktimes.qmd
 
 format:
   html:
     theme: minty
     css: styles.css
-    toc: true
-
-editor: visual
