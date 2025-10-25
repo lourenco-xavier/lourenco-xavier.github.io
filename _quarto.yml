@@ -20,7 +20,10 @@ website:
         menu:
           - text: "New York Times headlines"
             href: newyorktimes.qmd
-
+      - text: "Simulations"
+        menu:
+          - text: "Room with an Ocean view"
+            href: ocean_view.qmd
 format:
   html:
     theme: minty
