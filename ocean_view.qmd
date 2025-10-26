@@ -1,5 +1,5 @@
 ---
-title: "A Room with an Ocean View"
+title: "Room simulation"
 format: html
 execute:
   echo: true
@@ -7,60 +7,57 @@ execute:
   message: false
 ---
 
-Let's imagine the following scenario: in a beautiful sea-side university, there are 500 students total and 200 rooms with a beautiful view to the sea. If you are like me, you would want to have a room with a view to the sea as well. For the purpose of this simulation, let's assume everyone wants to have a room with a view to the sea. 
+Let's imagine that dorm room assignments will be out soon, and you REALLY want to be paired with your friend. However, there is a catch: every assignment is completely random, so your seniority (or lack of therefore) or preferences are not taken into account at all. The simulation models this exact scenario: every student is randomly placed into one of the forty room slots, two per room, and we check whether student 1 (you) and student 2 (your friend) happen to share the same number. I am also assuming that in this specific college, there are no single rooms (or 3+ people rooms, by that logic!). Just double rooms.
 
-Because everyone wants to have a room view a view, the university has decided to allocate these special rooms through a lottery system. Students are given a random lottery number that determines the order in which they can pick their room. The earlier your number, the better your chances of getting a sea-view room.
+I am running this simulation 1000 times to give us a more realistic sense of the chances of you being paired with your friend.
 
-In this simulation, I’ll model the housing lottery by randomly assigning both the order in which students pick and the rooms available. I’ll then repeat the process 200 times to estimate how likely each lottery position is to end up with a room that has a sea view. IN other words, I’ll use one function to simulate a full housing draw and a mapping function to repeat the simulation across all positions, allowing me to estimate the probability of getting a sea-view room for each possible lottery number.
-
+The function "same_room_once" randomly assigns 40 students to 20 double rooms and checks if you and your friend share a room.
+I chose map_lgl() in order to repeat the random assignment many times and estimate the probability empirically. The function returns TRUE if you and your friend end up in the same room, and FALSE otherwise.
 ```{r}
 #| echo: true
 #| message: false
 #| warning: false
 
-set.seed(47) # I chose 47 as the seed because of Pomona College.
 library(tidyverse)
 
-# this function runs one random housing draw 
-housing_lottery <- function(total_students = 500, view_rooms = 200){
-  order <- sample.int(total_students) # random lottery order
-  tibble(
-    order_number = 1:total_students,
-    room_type = if_else(order <= view_rooms, "beautiful_view", "regular")
-  )
+n_rooms <- 20
+room_capacity <- 2
+n_students <- 40
+
+you <- 1
+friend <- 2
+
+same_room_once <- function() {
+  assignments <- sample(rep(1:n_rooms, each = room_capacity))
+  assignments[you] == assignments[friend]
 }
 
-#  this function will help me find how often a position gets a view room
-#  (it now uses a lightweight simulation to speed things up dramatically)
-position_success <- function(order_spot, trials = 200,
-                             total_students = 500, view_rooms = 200){
-  mean(
-    replicate(trials, {
-      order <- sample.int(total_students)  # random lottery order
-      pick_rank <- match(order_spot, order)
-      pick_rank <= view_rooms
-    })
-  )
-}
+set.seed(47) # I chose 47 as my seed because of Pomona College
+n_sims <- 10000
 
-spots <- 1:500
-chance_by_spot <- map_dbl(spots, \(x) position_success(x))
-
-results <- tibble(order_spot = spots, prob_view = chance_by_spot)
-
-# Let's plot the results so we can better see the results of the simulation. I am using pink as the color as I like pink!
-ggplot(results, aes(x = order_spot, y = prob_view)) +
-  geom_line(color = "deeppink", linewidth = 1) +
-  geom_point(color = "deeppink", size = 0.8) +
-  scale_y_continuous(labels = scales::percent_format()) +
-  labs(
-    title = "Housing Lottery Simulation",
-    subtitle = "Chance of getting a room with a beautiful view by lottery order",
-    x = "Lottery order (1 = earliest pick)",
-    y = "Probability of getting a room with a beautiful view"
-  ) +
-  theme_minimal(base_size = 13)
+outcomes <- map_lgl(1:n_sims, ~ same_room_once())
+prob_same_room <- mean(outcomes)
+prob_same_room
 ```
+This code creates a tibble named "room_df" that lists our two possible outcomes, and subsequently assigns each corresponding probability(in "prob_same_room" and its complement "1-prob_same_room"). Then, to make the results more easy to interpretate, I use ggplot to graph the results.
+```{r}
+room_df <- tibble(
+  outcome = c("Same room", "Different rooms"),
+  prob = c(prob_same_room, 1 - prob_same_room)
+)
 
-
-From the simulation I ran, we can see that the probability of receiving a room with a sea view remains roughly in this imaginary college remains constant across all lottery positions. This occurs because both the lottery order and the room assignments are randomized, meaning each student has approximately the same chance (around 40%) of getting a sea-view room. The fluctuations in the line represent random variation between simulation runs rather than systematic differences in opportunity.
+ggplot(room_df, aes(x = outcome, y = prob * 100)) +
+  geom_col() + geom_text(
+    aes(label = paste(round(prob * 100, 2), "%")),
+    vjust = -0.5,
+    size = 6
+  ) +
+  scale_y_continuous(limits = c(0, 100)) +
+  labs(
+    title = "Probability You and Your Friend End Up in the Same Room",
+    subtitle = "20 double rooms, 40 students, 10000 random assignments",
+    x = NULL,
+    y = "Probability (%)"
+  )
+```
+ As I previously mentioned, to estimate these probabilities, I wrote a function that randomly assigns 40 students to 20 rooms, each holding exactly two people, and then checks whether you and your friend share the same room number.The graph shows the probability of each of these events occuring.The insights of this code are a little sad: the chances that you and your friend will get paired up in the same double room are a mere ~2.5%. Therefore, you are way more likely to end up with someone other than your friend (~97.5%). The plot clearly illustrates this imbalance, with the “Different rooms” bar towering over the “Same room” one.
