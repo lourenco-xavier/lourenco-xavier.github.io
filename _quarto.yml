@@ -24,6 +24,12 @@ website:
         menu:
           - text: "Room with an Ocean view"
             href: ocean_view.qmd
+      - text: "Data Science Ethics"
+        menu:
+          - text: "Dutch childcare benefits scandal"
+            href: dutch_data_ethics.qmd
+
+
 format:
   html:
     theme: minty

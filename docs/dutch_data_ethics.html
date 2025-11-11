@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Room simulation – Lourenço Xavier</title>
+<title>Dutch childcare benefits scandal – Lourenço Xavier</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -200,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Room simulation</h1>
+<h1 class="title">Dutch childcare benefits scandal</h1>
 </div>
 
 
@@ -217,65 +182,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Let’s imagine that dorm room assignments will be out soon, and you REALLY want to be paired with your friend. However, there is a catch: every assignment is completely random, so your seniority (or lack of therefore) or preferences are not taken into account at all. The simulation models this exact scenario: every student is randomly placed into one of the forty room slots, two per room, and we check whether student 1 (you) and student 2 (your friend) happen to share the same number. I am also assuming that in this specific college, there are no single rooms (or 3+ people rooms, by that logic!). Just double rooms.</p>
-<p>I am running this simulation 1000 times to give us a more realistic sense of the chances of you being paired with your friend.</p>
-<p>The function “same_room_once” randomly assigns 40 students to 20 double rooms and checks if you and your friend share a room. I chose map_lgl() in order to repeat the random assignment many times and estimate the probability empirically. The function returns TRUE if you and your friend end up in the same room, and FALSE otherwise.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n_rooms <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>room_capacity <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>n_students <span class="ot">&lt;-</span> <span class="dv">40</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>you <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>friend <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>same_room_once <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  assignments <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n_rooms, <span class="at">each =</span> room_capacity))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  assignments[you] <span class="sc">==</span> assignments[friend]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>) <span class="co"># I chose 47 as my seed because of Pomona College :) </span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>outcomes <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_sims, same_room_once)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>prob_same_room <span class="ot">&lt;-</span> <span class="fu">mean</span>(outcomes)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>prob_same_room</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.025</code></pre>
-</div>
-</div>
-<p>This code creates a tibble named “room_df” that lists our two possible outcomes, and subsequently assigns each corresponding probability(in “prob_same_room” and its complement “1-prob_same_room”). Then, to make the results more easy to interpretate, I use ggplot to graph the results.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>room_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="fu">c</span>(<span class="st">"Same room"</span>, <span class="st">"Different rooms"</span>),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fu">c</span>(prob_same_room, <span class="dv">1</span> <span class="sc">-</span> prob_same_room)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(room_df, <span class="fu">aes</span>(<span class="at">x =</span> outcome, <span class="at">y =</span> prob <span class="sc">*</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span> <span class="fu">geom_text</span>(</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">round</span>(prob <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>), <span class="st">"%"</span>)),</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">6</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>)) <span class="sc">+</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Probability You and Your Friend End Up in the Same Room"</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"20 double rooms, 40 students, 10000 random assignments"</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probability (%)"</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ocean_view_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>As I previously mentioned, to estimate these probabilities, I wrote a function that randomly assigns 40 students to 20 rooms, each holding exactly two people, and then checks whether you and your friend share the same room number.The graph shows the probability of each of these events occuring.The insights of this code are a little sad: the chances that you and your friend will get paired up in the same double room are a mere ~2.5%. Therefore, you are way more likely to end up with someone other than your friend (~97.5%). The plot clearly illustrates this imbalance, with the “Different rooms” bar towering over the “Same room” one.</p>
+<p>For project 4 of <a href="https://hardin47.netlify.app/courses/ds002r-fds/">Foundations of Data Science (R)</a>, I was tasked with exploring ethics and dynamics of power within data science, through a specific case study. The work is to be grounded on the following quotes from <a href="https://data-feminism.mitpress.mit.edu/">Data Feminism</a>:</p>
+<ol type="1">
+<li><p>[Examine] how power operates in the world today. This consists of asking who questions about data science: Who does the work (and who is pushed out)? Who benefits (and who is neglected or harmed)? Whose priorities get turned into products (and whose are overlooked)? <a href="https://data-feminism.mitpress.mit.edu/pub/vi8obxh7#nhrgx0zws6h">Source</a></p></li>
+<li><p>How did we get to the point where data science is used almost exclusively in the service of profit (for a few), surveillance (of the minoritized), and efficiency (amidst scarcity)? <a href="https://data-feminism.mitpress.mit.edu/pub/vi8obxh7#nifnaq2jmn9">Source</a>.</p></li>
+</ol>
+<section id="the-dutch-childcare-benefits-scandal" class="level1">
+<h1>The Dutch Childcare benefits scandal</h1>
+<p><strong>What happened?</strong></p>
+<p>The kinderopvangtoeslag is a form of childcare support in the Netherlands. It is a government program that aims to help parents and caregivers in raising children. More precisely the program provides parents and caregivers an allowance to purchase licensed childcare from child care centers so that they can work during the day. Trying to prevent fraudulent claims, the Dutch Tax Authority implemented an automated risk-scoring system to identify “high-risk” applicants. The system quickly gained traction for its potential for discrimination, which was later proven to be true by the. The scandal took place in between roughly 2013 and 2019 (Hoogenboom, 2022). Amnesty International (2021) finds that the algorithm was found to disproportionately classify people with immigrant backgrounds, dual citizenship and women overall as fraudulent applicants to the program - with no evidence to justify the decision. Cases labeled as “high-risk” were often automatically assumed to be fraudulent, with little or no human review. Because of faulty data and an unchecked algorithm, thousands of people had to pay thousands in fines even though they were innocent, whilst also having their government benefits cut. Both Amnesty International (2021) and Hoogenboom (2022) find that the scandal played a significant role on why the Dutch government collapsed in 2021.</p>
+<p><strong>What is the permission structure for using the data? Was it followed?</strong></p>
+<p>Hoogenboom (2022) claims that individuals who applied to the program submitted their data on personal income, employment, nationality, and childcare provider in order to apply for the benefits. Its collection was considered legal on the grounds that it was to be exclusively used for determining eligibility and calculating benefit amounts. The Dutch Tax Authority however not only used this data to flag potential fraudulent applications, but did so with an automated risk-scoring system which used parameters such as immigration background and gender to score individuals with a lower/higher risk for fraud. Hoogenboom (2022) also shows that in 2020, the Dutch Data Protection Authority ruled that the Dutch Tax Authority illegally processed the sensitive data after multiple reports showed that the risk-scoring system the government body used showed biases towards minorities .</p>
+<p><strong>Who was measured? Are those individuals representative of the people to whom we’d like to generalize / apply the algorithm?</strong></p>
+<p>Hoogenboom (2022) claims that people measured in this situation were applicants to the program that primarily targeted low-income parents and caregivers and gave them the opportunity to put their child in daycare during the day so that they could work. In this light, the individuals are representative of the program’s target population.</p>
+<p><strong>Should race / nationality be used as a variable?</strong></p>
+<p>Although it could be argued that certain factors such as immigration background should be recorded in order to track the development of the program, here are a few reasons on why it should have not been used as a risk-assessment tool. Firstly, it purported to establish a causal link between immigration background and risk of fraud. Not only has this link been proven to be false in hundreds and thousands of studies, it is also important to acknowledge the history of these kinds of claims that helped eugenics movements rise in the 20th century. Amnesty International (2021) and Hoogenboom (2022) find that the scandal resulted in some of the most vulnerable families in society becoming even more marginalized. Thousands were forced to repay large amounts and lost access to essential childcare support. Many were pushed into poverty, eviction, and unmanageable debt, and there were widespread reports of severe stress, mental health struggles, and strained relationships, including divorces and family breakdowns. In essence, nationality and immigration background acted as a proxy for “likelihood of fraud”, enhancing systemic discrimination.</p>
+<p><em>Is the data being used in unintended ways to the original study?</em> The data was originally collected to support families with childcare costs (Hoogenboom, 2022) . It was phrased as a “tough on crime” approach that aimed to make the Dutch governmental system more efficient. Instead, it was used to punish and penalize the most marginalized and those whom the program was designed to protect. According to Amnesty International (2012)The resulting injustice sparked national outrage, parliamentary investigations, and ultimately contributed to the resignation of the Dutch government in 2021, and bringing to the surface the dangers of algorithms trained on non-representative datasets without meaningful human oversight.</p>
+</section>
+<section id="why-does-this-matter-who-benefits-who-is-neglected-or-harmed-were-the-ethical-violations-in-the-interest-of-profit-surveillance-power" class="level1">
+<h1>Why does this matter? Who benefits? Who is neglected or harmed? Were the ethical violations in the interest of profit? Surveillance? Power?</h1>
+<p>The Dutch childcare benefits scandal is a clear example on the dangers of applying algorithmic risk-assessment systems in decision making without accountability or attention to power. It is hard to see who benefits from this situation, as even those who were not directly affected by the disaster, mainly the rest of the Dutch population, still suffered from the following government instability that ended in the fall of the government. In this way, everyone is harmed, but it is naive to claim that the harm was homogeneously distributed. Instead, as Amnesty International (2021) shows, the scandal resulted in hundreds of families going through unneeded stress and diverse forms of struggle, whose consequences can never be undone even with reparations. The ethical violations, which were covered with politicians’ “tough on crime” narrative, was a clear power and surveillance grab in a nation widely recognized for its democratic principles and norms, showing us that no government or state is immune from it, and how important transparency and oversight are in the deployment of algorithms in the public sphere.</p>
+</section>
+<section id="literature-reviewed" class="level1">
+<h1>Literature reviewed</h1>
+<p>Alexander Hoogenboom. (2022, November 2). Dutch Childcare Allowance Scandal: The importance of investigation powers. Equinet. (https://equineteurope.org/netherlands-institute-for-human-rights-role-in-the-investigation-of-the-childcare-allowance-scandal/)</p>
+<p>Amnesty International. (2021, October 25). Dutch childcare benefit scandal an urgent wake-up call to ban racist algorithms. (https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/)</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

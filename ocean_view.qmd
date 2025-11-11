@@ -27,15 +27,15 @@ n_students <- 40
 you <- 1
 friend <- 2
 
-same_room_once <- function() {
+same_room_once <- function(x) {
   assignments <- sample(rep(1:n_rooms, each = room_capacity))
   assignments[you] == assignments[friend]
 }
 
-set.seed(47) # I chose 47 as my seed because of Pomona College
+set.seed(47) # I chose 47 as my seed because of Pomona College :) 
 n_sims <- 10000
 
-outcomes <- map_lgl(1:n_sims, ~ same_room_once())
+outcomes <- map_lgl(1:n_sims, same_room_once)
 prob_same_room <- mean(outcomes)
 prob_same_room
 ```
