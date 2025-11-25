@@ -184,15 +184,11 @@ ggplot(
 ```
 In both states, speed-related violations seem to be the most common, although California dominates it by far (possibly and substantially because of its much greater population). I would suppose part of the reason why however, in both states, speed-related violations are most common are in part because of people going to party at night and other forms of leisure. These factors can lead to more aggressive driving, higher average speeds, and therefore a greater frequency of speed-related stops.
 
-```{r}
-dbDisconnect(con_traffic)
-```
-
-```
 
 #References
 
 Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.” Nature Human Behaviour, 1–10.
  
 Stanford Open Policing Project. (n.d.). OpenPolicing database. Retrieved November 25, 2025, from https://openpolicing.stanford.edu/
+
 
