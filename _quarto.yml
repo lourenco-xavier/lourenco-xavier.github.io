@@ -28,6 +28,11 @@ website:
         menu:
           - text: "Dutch childcare benefits scandal"
             href: dutch_data_ethics.qmd
+      
+      - text: "SQL"
+        menu:
+          - text: "Traffic Stops"
+            href: traffic_stops.qmd
 
 
 format:
