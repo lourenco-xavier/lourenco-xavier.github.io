@@ -1,6 +1,8 @@
 ---
 title: "Traffic stops"
 format: html
+freeze: true
+
 ---
 
 For this project we will be working with data from the [The Stanford Open Policing Project](https://openpolicing.stanford.edu/). The rich data collected by their team contains millions of traffic stops by law enforcement agencies across the United States. From this dataset, I want to see if there are patterns for what days of the week tend to have more vehicle traffic stops by law enforcement agents in the states of California, Oregon and Washington (west coast!),
@@ -99,6 +101,8 @@ ca_or_wa_weekday <- dbGetQuery(
 
 Now, we can plot this information!
 ```{r, warning=FALSE, message=FALSE}
+#| echo: true
+#| message: false
 #| warning: false
 library(ggplot2)
 
@@ -121,7 +125,7 @@ ggplot(
 As expected (and this is true for all states considered), out of all weekdays, Friday has the highest traffic stops by enforcement agents. 
 
 
-Now that we have information on the days of the week, let's be even more precise: what are the most common violations that happen during fridays across these states? Unfortunetly, the variable "violations" is only present in the tables for Washignton and California, so we can't use Oregon here.
+Now that we have information on the days of the week, let's be even more precise: what are the most common violations that happen during fridays across these states? Unfortunately, the variable "violations" is only present in the tables for Washignton and California, so we can't use Oregon here.
 
 First, we need to once more join the tables.
 
@@ -157,7 +161,19 @@ friday_violations <- dbGetQuery(
 )
 ```
 
-```{r,warning=FALSE, message=FALSE}
+Creating the top 5 violations:
+```{r}
+top5_friday_violations <- friday_violations |>
+  dplyr::group_by(state) |>
+  dplyr::slice_max(order_by = total_violations, n = 5) |>
+  dplyr::ungroup()
+```
+
+Now plotting!
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
 library(dplyr)
 library(ggplot2)
 
@@ -188,7 +204,7 @@ In both states, speed-related violations seem to be the most common, although Ca
 dbDisconnect(con_traffic)
 ```
 
-```
+
 
 #References
 
