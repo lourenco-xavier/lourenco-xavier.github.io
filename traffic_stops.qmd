@@ -5,12 +5,15 @@ freeze: true
 
 ---
 
-For this project we will be working with data from the [The Stanford Open Policing Project](https://openpolicing.stanford.edu/). The rich data collected by their team contains millions of traffic stops by law enforcement agencies across the United States. From this dataset, I want to see if there are patterns for what days of the week tend to have more vehicle traffic stops by law enforcement agents in the states of California, Oregon and Washington (west coast!),
+For this project we will be working with data from the [The Stanford Open Policing Project](https://openpolicing.stanford.edu/). The rich data collected by their team contains millions of traffic stops by law enforcement agencies across the United States. From this data set, I want to see if there are patterns for what days of the week tend to have more vehicle traffic stops by law enforcement agents in the states of California, Oregon and Washington (west coast!),
 
 
 
-First, we need to bring the data through SQL. This is important has this data set is so rich that importing it fully could crash our computers! 
+First, we need to bring the data through SQL. This is important as this data set is so rich that importing it fully could crash our computers! 
 ```{r}
+#| echo: true
+#| message: false
+#| warning: false
 library(RMariaDB)
 library(tidyverse)
 ```
@@ -32,17 +35,17 @@ DBI::dbListTables(con_traffic)
 Now, let's explore the variables within the tables.
 ```{sql}
 #| connection: con_traffic
-SELECT * FROM ca_statewide_2023_01_26 LIMIT 8;
+SELECT * FROM ca_statewide_2023_01_26 LIMIT 5;
 ```
 
 ```{sql}
 #| connection: con_traffic
-SELECT * FROM or_statewide_2020_04_01 LIMIT 8;
+SELECT * FROM or_statewide_2020_04_01 LIMIT 5;
 ```
 
 ```{sql}
 #| connection: con_traffic
-SELECT * FROM wa_statewide_2020_04_01 LIMIT 8;
+SELECT * FROM wa_statewide_2020_04_01 LIMIT 5;
 ```
 
 We should also take a look into the kinds of variables we are working on for each state.
@@ -164,9 +167,9 @@ friday_violations <- dbGetQuery(
 Creating the top 5 violations:
 ```{r}
 top5_friday_violations <- friday_violations |>
-  dplyr::group_by(state) |>
-  dplyr::slice_max(order_by = total_violations, n = 5) |>
-  dplyr::ungroup()
+group_by(state) |>
+slice_max(order_by = total_violations, n = 5) |>
+ungroup()
 ```
 
 Now plotting!
@@ -198,7 +201,8 @@ ggplot(
     fill = "State"
   ) 
 ```
-In both states, speed-related violations seem to be the most common, although California dominates it by far (possibly and substantially because of its much greater population). I would suppose part of the reason why however, in both states, speed-related violations are most common are in part because of people going to party at night and other forms of leisure. These factors can lead to more aggressive driving, higher average speeds, and therefore a greater frequency of speed-related stops.
+In both states, speed-related violations seem to be the most common, although California dominates it by far (possibly and substantially because of its much greater population). I would suppose part of the reason why however, in both states, speed-related violations are most common are in part because of people going to party at night and other forms of leisure. These factors can lead to more aggressive driving, higher average speeds, and therefore a greater frequency of speed-related stops. Another thing that was interesting to me is the difference in the types of violations between both states: California's traffic violations seem to be of a more severe/of safety concern reason, whilst for Washington it has to do more with procedural violations (like not having your seatbelt on or your vehicle license!)
+
 
 ```{r}
 dbDisconnect(con_traffic)
