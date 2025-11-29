@@ -65,10 +65,9 @@ DESCRIBE wa_statewide_2020_04_01
 ```
 
 With all of this information, we now need to join these 3 tables so we can do our west coast analysis.
-```{r}
-ca_or_wa_weekday <- dbGetQuery(
-  con_traffic,
-  "
+```{sql}
+#| connection: con_traffic
+#| output.var: ca_or_wa_weekday
   SELECT
       'California' AS state,
       DAYOFWEEK(date) AS weekday,
@@ -98,8 +97,6 @@ ca_or_wa_weekday <- dbGetQuery(
   GROUP BY state, DAYOFWEEK(date)
 
   ORDER BY weekday, state;
-  "
-)
 ```
 
 Now, we can plot this information!
@@ -116,26 +113,24 @@ ggplot(
   geom_line(linewidth = 1) +
   geom_point(size = 2) +
   scale_x_continuous(breaks = 1:7)+
-  scale_y_continuous(labels = scales::comma)+
   labs(
     title = "Traffic Stops by Day of Week (CA, OR, WA)",
-        subtitle = "Where 1 = Sun, 2 = Mon, 3 = Tue, 4 = Wed, 5 = Thu, 6 = Fri, 7 = Sat",
+        subtitle = "1 = Sun, 2 = Mon, 3 = Tue, 4 = Wed, 5 = Thu, 6 = Fri, 7 = Sat",
     x = "Day of Week",
     y = "Total Stops",
     color = "State"
   )
 ```
-As expected (and this is true for all states considered), out of all weekdays, Friday has the highest traffic stops by enforcement agents. 
+As expected (and this is true for all states considered), out of all weekdays, Friday has the highest traffic stops by enforcement agents. This might be because people drive more on Fridays since not only do they go to work, but also go home and then go to other places for leisure. It is hard to say that there is a similar trend going on the other way that is true for all states though (meaning, the day of the week with the lowest traffic stops by enforcement agents!) as there is more variability in this scenario.
 
 
 Now that we have information on the days of the week, let's be even more precise: what are the most common violations that happen during fridays across these states? Unfortunately, the variable "violations" is only present in the tables for Washignton and California, so we can't use Oregon here.
 
 First, we need to once more join the tables.
 
-```{r}
-friday_violations <- dbGetQuery(
-  con_traffic,
-  "
+```{sql}
+#| connection: con_traffic
+#| output.var: friday_violations
   SELECT
       state,
       violation,
@@ -146,7 +141,7 @@ friday_violations <- dbGetQuery(
           violation,
           date
       FROM ca_statewide_2023_01_26
-      WHERE violation IS NOT NULL AND violation <> ''
+      WHERE violation IS NOT NULL 
 
       UNION ALL
 
@@ -155,21 +150,19 @@ friday_violations <- dbGetQuery(
           violation,
           date
       FROM wa_statewide_2020_04_01
-      WHERE violation IS NOT NULL AND violation <> ''
+      WHERE violation IS NOT NULL 
   ) AS combined
   WHERE DAYOFWEEK(date) = 6
   GROUP BY state, violation
   ORDER BY state, total_violations DESC;
-  "
-)
 ```
 
 Creating the top 5 violations:
 ```{r}
 top5_friday_violations <- friday_violations |>
-group_by(state) |>
-slice_max(order_by = total_violations, n = 5) |>
-ungroup()
+  group_by(state) |>
+  arrange(desc(total_violations)) |>
+  slice_head(n = 5)
 ```
 
 Now plotting!
@@ -204,6 +197,8 @@ ggplot(
 In both states, speed-related violations seem to be the most common, although California dominates it by far (possibly and substantially because of its much greater population). I would suppose part of the reason why however, in both states, speed-related violations are most common are in part because of people going to party at night and other forms of leisure. These factors can lead to more aggressive driving, higher average speeds, and therefore a greater frequency of speed-related stops. Another thing that was interesting to me is the difference in the types of violations between both states: California's traffic violations seem to be of a more severe/of safety concern reason, whilst for Washington it has to do more with procedural violations (like not having your seatbelt on or your vehicle license!)
 
 
+
+To wrap up this project, let's summarize what I did. I used SQL to query traffic data in all west coast states (not if you consider Alaska to be one though!). After doing this I summarized vehicular stops by traffic agents by the day of the week across all three states, and found that across them Fridays are the days with the highest vehicular stops by traffic aggents. Then, given the lack of data for Oregon, I focused on the most common violations that occurred in Fridays in both California and Washington, and noticed that the violations in California seem to be of a more safety-concern cause than in Washington, where a lot of violations were associated with procedural violations.
 ```{r}
 dbDisconnect(con_traffic)
 ```
