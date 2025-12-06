@@ -19,7 +19,9 @@ library(tidyverse)
 erasmus <- read_csv(
   "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-03-08/erasmus.csv"
 )
-
+```
+Now, we calculate the top 15 receiving cities and then create the graph.
+```{r}
 top_receive <- erasmus |>
   count(receiving_city, name = "n") |>
   arrange(desc(n))|>
@@ -31,3 +33,6 @@ top_receive <- erasmus |>
   labs(x = "City", y = "Number of Students",
        title = "Top 15 Erasmus Receiving Cities in 2022")
 ```
+
+```
+
