@@ -2,6 +2,8 @@
 title: "Traffic stops"
 format: html
 freeze: true
+author: Lourenço Xavier
+date: 1 December, 2025
 
 ---
 
