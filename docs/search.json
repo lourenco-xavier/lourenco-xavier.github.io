@@ -18,7 +18,7 @@
     "href": "eurovision.html",
     "title": "Total points by Eurovision participating country (TidyTuesday 2022-03-08)",
     "section": "",
-    "text": "Source: TidyTuesday (Week 2022-05-17). Dataset accessed from the R4DS Online Learning Community: https://github.com/rfordatascience/tidytuesday.\nOriginal data: Country-to-country voting data sourced from Data.World (https://data.world/)."
+    "text": "Source: TidyTuesday (Week 2022-05-17). Dataset accessed from the R4DS Online Learning Community: https://github.com/rfordatascience/tidytuesday.\nOriginal data: Country-to-country voting data sourced from Data.World (https://data.world/).\n\nlibrary(tidyverse)\nlibrary(ggplot2)\n\neurovision &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2022/2022-05-17/eurovision.csv')\n\ncount_points &lt;- eurovision |&gt;\n  group_by(artist_country) |&gt;\n  summarise(total_points = sum(total_points, na.rm = TRUE), .groups = \"drop\") |&gt;\n  arrange(desc(total_points)) |&gt;\n  slice_head(n = 15)\n\nggplot(count_points, aes(x = reorder(artist_country, total_points), y = total_points)) +\n  geom_point(size = 4, color = \"darkgreen\") +\n  geom_segment(aes(x = artist_country, xend = artist_country,\n                   y = 0, yend = total_points), color = \"darkgreen\") +\n  coord_flip() +\n  labs(x = \"Country\", y = \"Total Votes\",\n       title = \"Eurovision total votes by participating country (1956 to 2022)\")\n\n\n\n\n\n\n\n\n\nshare_points &lt;- eurovision |&gt;\n  group_by(artist_country) |&gt;\n  summarise(total_points = sum(total_points, na.rm = TRUE), .groups = \"drop\")\n\nshare_points &lt;- share_points |&gt;\n  mutate(perc_share = total_points / sum(total_points) * 100) |&gt;\n  arrange(desc(perc_share))|&gt; \n  slice_head(n=20)\nggplot(share_points, aes(x = reorder(artist_country, perc_share), y = perc_share)) +\n  geom_col(fill = \"darkgreen\") +\n  coord_flip() +\n  labs(x = \"Country\",\n       y = \"Share of Total Votes (%)\",\n       title = \"Countries by Share of Eurovision Votes (1956–2022)\")"
   },
   {
     "objectID": "dutch_data_ethics.html",
@@ -39,7 +39,7 @@
     "href": "erasmus_destinations.html",
     "title": "Erasmus Mobility (TidyTuesday 2022-03-08)",
     "section": "",
-    "text": "Source: TidyTuesday (Week 2022-03-08). Dataset accessed from the R4DS Online Learning Community: https://github.com/rfordatascience/tidytuesday.\nOriginal data: Erasmus+ mobility statistics published by the European Union on data.europa (https://data.europa.eu/en)."
+    "text": "Source: TidyTuesday (Week 2022-03-08). Dataset accessed from the R4DS Online Learning Community: https://github.com/rfordatascience/tidytuesday.\nOriginal data: Erasmus+ mobility statistics published by the European Union on data.europa (https://data.europa.eu/en).\n\nlibrary(tidyverse)\nerasmus &lt;- read_csv(\n  \"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-03-08/erasmus.csv\"\n)\n\ntop_receive &lt;- erasmus |&gt;\n  count(receiving_city, name = \"n\") |&gt;\n  arrange(desc(n))|&gt;\n  slice_head(n=15)\n\n  ggplot(top_receive, aes(x = reorder(receiving_city, n), y = n,)) +\n  geom_col(fill=\"navy\") +\n  coord_flip() +\n  labs(x = \"City\", y = \"Number of Students\",\n       title = \"Top 15 Erasmus Receiving Cities in 2022\")"
   },
   {
     "objectID": "data_viz.html",
