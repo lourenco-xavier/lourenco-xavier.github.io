@@ -1,6 +1,8 @@
 ---
 title: "Dutch childcare benefits scandal"
 format: html
+author: Lourenço Xavier
+date: 12 November, 2025
 ---
 
 For project 4 of [Foundations of Data Science (R)](https://hardin47.netlify.app/courses/ds002r-fds/), I was tasked with exploring ethics and dynamics of power within data science, through a specific case study. The work is to be grounded on the following quotes from [Data Feminism](https://data-feminism.mitpress.mit.edu/):
@@ -11,7 +13,7 @@ For project 4 of [Foundations of Data Science (R)](https://hardin47.netlify.app/
 
 # The Dutch Childcare benefits scandal
 
-**What happened?**
+## What happened?
   
   The kinderopvangtoeslag is a form of childcare support in the Netherlands. It is a government program that aims to help parents and caregivers in raising children. More precisely the program provides parents and caregivers an allowance to purchase licensed childcare from child care centers so that they can work during the day. Trying to prevent fraudulent claims, the  Dutch Tax Authority implemented an automated risk-scoring system to identify “high-risk” applicants. The system quickly gained traction for its potential for discrimination, which was later proven to be true by the. The scandal took place in between roughly 2013 and 2019 (Hoogenboom, 2022). Amnesty International (2021) finds that the algorithm was found to disproportionately classify people with immigrant backgrounds, dual citizenship and women overall as fraudulent applicants to the program - with no evidence to justify the decision. Cases labeled as “high-risk” were often automatically assumed to be fraudulent, with little or no human review. Because of faulty data and an unchecked algorithm, thousands of people had to pay thousands in fines even though they were innocent, whilst also having their government benefits cut.  Both Amnesty International (2021) and Hoogenboom (2022) find that the scandal played a significant role on why the Dutch government collapsed in 2021.
 
@@ -28,12 +30,13 @@ For project 4 of [Foundations of Data Science (R)](https://hardin47.netlify.app/
   Although it could be argued that certain factors such as immigration background should be recorded in order to track the development of the program, here are a few reasons on why it should have not been used as a risk-assessment tool. Firstly, it purported to establish a causal link between immigration background and risk of fraud. Not only has this link been proven to be false in hundreds and thousands of studies, it is also important to acknowledge the history of these kinds of claims that helped eugenics movements rise in the 20th century. Amnesty International (2021) and Hoogenboom (2022) find that the scandal resulted in some of the most vulnerable families in society becoming even more marginalized. Thousands were forced to repay large amounts and lost access to essential childcare support. Many were pushed into poverty, eviction, and unmanageable debt, and there were widespread reports of severe stress, mental health struggles, and strained relationships, including divorces and family breakdowns. In essence, nationality and immigration background acted as a proxy for “likelihood of fraud”, enhancing systemic discrimination.
 
 
-*Is the data being used in unintended ways to the original study?*
+**Is the data being used in unintended ways to the original study?**
+
   The data was originally collected to support families with childcare costs (Hoogenboom, 2022) . It was phrased as a “tough on crime” approach that aimed to make the Dutch governmental system more efficient. Instead, it was used to punish and penalize the most marginalized and those whom the program was designed to protect.  According to Amnesty International (2012)The resulting injustice sparked national outrage, parliamentary investigations, and ultimately contributed to the resignation of the Dutch government in 2021, and bringing to the surface the dangers of algorithms trained on non-representative datasets without meaningful human oversight.
   
-# Why does this matter? Who benefits? Who is neglected or harmed? Were the ethical violations in the interest of profit? Surveillance? Power?
+**Why does this matter? Who benefits? Who is neglected or harmed? Were the ethical violations in the interest of profit? Surveillance? Power?**
 
-The Dutch childcare benefits scandal is a clear example on the dangers of applying algorithmic risk-assessment systems in decision making without accountability or attention to power. It is hard to see who benefits from this situation, as even those who were not directly affected by the disaster, mainly the rest of the Dutch population, still suffered from the following government instability that ended in the fall of the government. In this way, everyone is harmed, but it is naive to claim that the harm was homogeneously distributed. Instead, as Amnesty International (2021) shows, the scandal resulted in hundreds of families going through unneeded stress and diverse forms of struggle, whose consequences can never be undone even with reparations. The ethical violations, which were covered with politicians’ “tough on crime” narrative, was a clear power and surveillance grab in a nation widely recognized for its democratic principles and norms, showing us that no government or state is immune from it, and how important transparency and oversight are in the deployment of algorithms in the public sphere.  
+The Dutch childcare benefits scandal is a clear example on the dangers of applying algorithmic risk-assessment systems in decision making without accountability or attention to power. It is hard to see who benefits from this situation, as even those who were not directly affected by the disaster, mainly the rest of the Dutch population, still suffered from the following government instability that ended in the fall of the government. In this way, everyone is harmed, but it is naive to claim that the harm was homogeneously distributed. Instead, as Amnesty International (2021) shows, the scandal resulted in hundreds of families going through unneeded stress and diverse forms of struggle, whose consequences can never be undone even with reparations. The ethical violations show us that no government or state is immune from these kinds of issues, and how important transparency and oversight are in the deployment of algorithms in the public sphere.  
 
 # Literature reviewed
 
