@@ -11,8 +11,8 @@ execute:
   message: false
 ---
 
-[Source: TidyTuesday (week 2022-05-17)](https://github.com/rfordatascience/tidytuesday)  
-*Original data: The country to country voting data comes from Data.World*
+**Source:** TidyTuesday (Week 2022-05-17). Dataset accessed from the R4DS Online Learning Community: <https://github.com/rfordatascience/tidytuesday>.  
+*Original data: Country-to-country voting data sourced from Data.World (<https://data.world/>).*
 
 
 ```{r}
@@ -34,8 +34,6 @@ ggplot(count_points, aes(x = reorder(artist_country, total_points), y = total_po
   coord_flip() +
   labs(x = "Country", y = "Total Votes",
        title = "Eurovision total votes by participating country (1956 to 2022)")
-
-
 ```
 
 

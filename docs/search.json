@@ -18,7 +18,7 @@
     "href": "eurovision.html",
     "title": "Total points by Eurovision participating country (TidyTuesday 2022-03-08)",
     "section": "",
-    "text": "Source: TidyTuesday (week 2022-05-17)\nOriginal data: The country to country voting data comes from Data.World"
+    "text": "Source: TidyTuesday (Week 2022-05-17). Dataset accessed from the R4DS Online Learning Community: https://github.com/rfordatascience/tidytuesday.\nOriginal data: Country-to-country voting data sourced from Data.World (https://data.world/)."
   },
   {
     "objectID": "dutch_data_ethics.html",
@@ -39,7 +39,7 @@
     "href": "erasmus_destinations.html",
     "title": "Erasmus Mobility (TidyTuesday 2022-03-08)",
     "section": "",
-    "text": "Source: TidyTuesday (week 2022-03-08)\nOriginal data: Erasmus+ mobility stats (sourced from Data.Europa)."
+    "text": "Source: TidyTuesday (Week 2022-03-08). Dataset accessed from the R4DS Online Learning Community: https://github.com/rfordatascience/tidytuesday.\nOriginal data: Erasmus+ mobility statistics published by the European Union on data.europa (https://data.europa.eu/en)."
   },
   {
     "objectID": "data_viz.html",
