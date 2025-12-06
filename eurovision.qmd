@@ -14,7 +14,7 @@ execute:
 **Source:** TidyTuesday (Week 2022-05-17). Dataset accessed from the R4DS Online Learning Community: <https://github.com/rfordatascience/tidytuesday>.  
 *Original data: Country-to-country voting data sourced from Data.World (<https://data.world/>).*
 
-
+First, we count and rearrange the points received per each participating country
 ```{r}
 library(tidyverse)
 library(ggplot2)
@@ -26,7 +26,10 @@ count_points <- eurovision |>
   summarise(total_points = sum(total_points, na.rm = TRUE), .groups = "drop") |>
   arrange(desc(total_points)) |>
   slice_head(n = 15)
+```
 
+Now, let's graph the total votes by participaing country.
+```{r}
 ggplot(count_points, aes(x = reorder(artist_country, total_points), y = total_points)) +
   geom_point(size = 4, color = "darkgreen") +
   geom_segment(aes(x = artist_country, xend = artist_country,
@@ -36,7 +39,7 @@ ggplot(count_points, aes(x = reorder(artist_country, total_points), y = total_po
        title = "Eurovision total votes by participating country (1956 to 2022)")
 ```
 
-
+As an extra, let's find the share of Eurovision votes by country.
 ```{r}
 share_points <- eurovision |>
   group_by(artist_country) |>
@@ -46,6 +49,10 @@ share_points <- share_points |>
   mutate(perc_share = total_points / sum(total_points) * 100) |>
   arrange(desc(perc_share))|> 
   slice_head(n=20)
+```
+
+Now, let's plot it.
+```{r}
 ggplot(share_points, aes(x = reorder(artist_country, perc_share), y = perc_share)) +
   geom_col(fill = "darkgreen") +
   coord_flip() +
