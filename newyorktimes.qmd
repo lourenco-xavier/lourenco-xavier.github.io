@@ -5,12 +5,12 @@ format: html
 
 Have you ever been curious about the hidden patterns behind [New York Times](https://www.nytimes.com/) headlines (...especifically Bill Clinton and Bosnia)? If so, you’re in for a treat! Using the RTextTools package, we’ll explore a dataset of over 3,000 headlines to show trends in the news of 1996 to 2006.
 
-The dataset I am using comes from the **RTextTools** package and is documented  
-[here](https://www.rdocumentation.org/packages/RTextTools/versions/1.4.3/topics/NYTimes?utm_source). It is a dataset with labeled headlines from The New York Times, compiled by Professor Amber E. Boydstun at the University of California, Davis. As I stated previously, it contains information from 1996 to 2001.
+The dataset I am using comes from the **RTextTools** package and is documented [here](https://www.rdocumentation.org/packages/RTextTools/versions/1.4.3/topics/NYTimes?utm_source). It is a dataset with labeled headlines from The New York Times, compiled by Professor Amber E. Boydstun at the University of California, Davis. As I stated previously, it contains information from 1996 to 2001.
+
+It is worth mentioning that there is a singular headliner per day, located in the top line of the newspaper.
 
 
 It contains five variables — `Article_ID`, `Date`, `Title`, `Subject`, and `Topic.Code`. 
-
 
 ```{r}
 #| echo: true
@@ -18,7 +18,6 @@ It contains five variables — `Article_ID`, `Date`, `Title`, `Subject`, and `To
 #| warning: false
 
 library(tidyverse)
-library(RTextTools)
 data("NYTimes", package = "RTextTools")
 nyt <- as_tibble(NYTimes)
 head(nyt)
@@ -26,7 +25,7 @@ head(nyt)
 
 
 Clinton was all over the news in the late 1990s. Here is a vizualisation of such:
-
+First, we get the data and then prepare it for our analysis
 ```{r}
 nyt_clinton_week <- nyt |>
   mutate(
@@ -38,7 +37,9 @@ nyt_clinton_week <- nyt |>
   filter(has_clinton, !is.na(week)) |>
   group_by(week) |>
   summarise(n = n())
-
+```
+Now, we plot the information we gathered.
+```{r}
 ggplot(nyt_clinton_week, aes(x = week, y = n)) +
   geom_line(color = "blue", linewidth = 1) +
   geom_point(color = "blue") +
@@ -49,54 +50,53 @@ ggplot(nyt_clinton_week, aes(x = week, y = n)) +
   ) +
   theme_minimal(base_size = 8)
 ```
+
 The story in figure 1 is clear! Clinton was seeking presidential re-election in 1996, then back in office in 1997 and then, from 1998 to 2000, the Lewinsky scandal and impeachment took place. In the 2000s, he was no longer in office, explaining the lack of mentions about him.
 
 In 1997, Clinton visited Bosnia ([did you know?](https://www.youtube.com/watch?v=qt7uKaLPlCE)). In that topic, *how often is Bosnia mentioned in this time frame in the New York Times Headlines?* Given Bosnia's situation gained particular international attention in the very late 90s, let's analyse the data in this dataset going till 1999.
 
+First, we load the dataset and we prepare it for our analysis. This extracts dates and weekly bins, and identifies headlines containing Bosnia-related terms.
 ```{r}
-library(tidyverse)
-library(lubridate)
-library(RTextTools)
-
 nyt_balkan <- as_tibble(NYTimes) |>
   mutate(
-    title_lower   = str_to_lower(Title),
+    title_lower = str_to_lower(Title),
     subject_lower = str_to_lower(Subject),
-    date  = dmy(Date),
-    week  = floor_date(date, "week", week_start = 1),
-    has_bosnia = str_detect(title_lower,
+    date = dmy(Date),
+    week = floor_date(date,"week", week_start = 1),
+    has_bosnia = str_detect(
+      title_lower,
       "\\bbosnian?\\b|\\bbosnia-?herzegovina\\b|\\bsarajevo\\b|\\bbalkans?\\b"
     )
   ) |>
   filter(!is.na(week))
-
+```
+Now, we count how many Bosnia-related headlines appear in each week.
+```{r}
 count_bosnia_by_week <- nyt_balkan |>
   filter(has_bosnia) |>
   count(week, name = "n")
-
+```
+Now we create a time series graph with the information we have gathered
+```{r}
 ggplot(count_bosnia_by_week, aes(x = week, y = n)) +
   geom_line(color = "black") +
   geom_point(color = "red") +
   labs(
     title = "Fig 2: NYT headlines mentioning Bosnia-related terms (weekly, 1996–1999)",
-    x = "Week", y = "Number of Headlines"
+    x = "Week",
+    y = "Number of Headlines"
   ) +
   theme_minimal(base_size = 12)
-
+```
+Finally, we use a regex lookbehind to capture words that follow “in”, filters cases where the word is “Bosnia”, and counts which subject categories these headlines belong to
+```{r}
 lookaround <- nyt_balkan |>
   mutate(before_in = str_extract(title_lower, "(?<=\\bin\\s)\\w+")) |>
   filter(before_in == "bosnia") |>
-  count(Subject)
+  count(Subject, name = "n") |>
+  arrange(desc(n))
 
-ggplot(lookaround, aes(y = Subject, x = n)) +
-  geom_col() +
-  labs(
-    title = "Fig 3: Subjects appearing with 'in Bosnia'",
-    subtitle = "1996-1999",
-    x = "Subject", y = "Count"
-  ) +
-  theme_minimal(base_size = 12)
-
+lookaround
 ```
 
 The mentions of Bosnia in the NYT headlines in figure 2 reflect its situation in the late 90s. This idea is further further complemented by figure 3. Mentions spike in early 1996 as post-Dayton peacekeeping and reconstruction in Bosnia dominated coverage, then fade through 1997–98. They surge again in 1999 when Balkans-wide news (especially the Kosovo conflict) drives headlines.
