@@ -10,32 +10,22 @@ website:
         text: Home
       - href: about.qmd
         text: About
-      - text: "Data Visualization"
+      - text: "Data Science Projects"
         menu:
           - text: "Erasmus receiving cities"
             href: erasmus_destinations.qmd
           - text: "Eurovision points per country"
             href: eurovision.qmd
-      - text: "Text Analysis"
-        menu:
           - text: "New York Times headlines"
             href: newyorktimes.qmd
-      - text: "Simulations"
-        menu:
           - text: "Room with an Ocean view"
             href: ocean_view.qmd
-      - text: "Data Science Ethics"
-        menu:
           - text: "Dutch childcare benefits scandal"
             href: dutch_data_ethics.qmd
-      
-      - text: "SQL"
-        menu:
           - text: "Traffic Stops"
             href: traffic_stops.qmd
 
-
 format:
   html:
-    theme: minty
+    theme: flatly
     css: styles.css

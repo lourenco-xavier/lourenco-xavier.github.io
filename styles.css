@@ -1,3 +1,12 @@
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* Apply Inter to the whole website */
+body {
+  font-family: 'Inter', sans-serif !important;
+}
+
+
 /* css styles */
 .title-image-credit {
   text-align: center;
