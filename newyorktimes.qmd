@@ -1,6 +1,8 @@
 ---
 title: "Headlines from the New York Times"
 format: html
+author: Lourenço Xavier
+date: 08 October, 2025
 ---
 
 Have you ever been curious about the hidden patterns behind [New York Times](https://www.nytimes.com/) headlines (...especifically Bill Clinton and Bosnia)? If so, you’re in for a treat! Using the RTextTools package, we’ll explore a dataset of over 3,000 headlines to show trends in the news of 1996 to 2006.
