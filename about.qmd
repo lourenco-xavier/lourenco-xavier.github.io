@@ -2,16 +2,19 @@
 title: "About"
 ---
 
-**What languages do you speak?**
+# Current Projects
 
-Portuguese, English and Spanish.
+I am currently working as a Research Assistant in the Economics Department at Claremont McKenna College, alongside [Laura Grant, Ph.D](https://www.cmc.edu/academic/faculty/profile/laura-grant) studying how environmental and financial nudges influence commuter behavior and reduce congestion in California. This project involves applying econometric methods to evaluate the effectiveness of different interventions and understand how framing and incentives shape decision-making.
 
-**What's your favorite dish?**
+I am also working alongside [Jeffrey Flory, Ph.D](https://www.cmc.edu/academic/faculty/profile/jeffrey-flory), where I study how surface-level characteristics impact productivity and dynamics amongst coworkers. Alongside Dr. Flory, I am also working on creating a survey that seeks to explore the impacts of artificial intelligence in college education.
 
-Anything with cod!
+To learn more about these projects, please contact me at <lxavier@students.pitzer.edu>.
 
-**What is your favorite national park?**
 
-I will let you guess this one.
+# Past Projects
 
-![](media_pics/yosemite.png){fig-align="center" width="400"}
+During my time at the [University of Chicago](https://economics.uchicago.edu/) and [Brookings Institution](https://www.brookings.edu/) I explored the impacts of crime rates in the 2016 American presidential elections, finding that in swing states, counties with higher crime levels tended to have lower turnout rates. My research was presented at the PREDOC Student Research Conference at the [World Bank](https://www.worldbank.org/ext/en/home) (2025).
+
+# Others
+
+My academic path has crossed paths with the [United World Colleges](https://uwc.org/), in [Singapore](https://www.uwcsea.edu.sg/). Besides, I have been blessed to study in the Azores, Brazil, Cape Verde, Ireland and continental Portugal mostly through academic scholarships.

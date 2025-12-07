@@ -1,6 +1,6 @@
 ---
 title: "Lourenço Xavier"
-image: media_pics/tininha.png
+image: media_pics/linkedin_pic.png
 about:
   template: trestles
   links:
@@ -17,12 +17,15 @@ format:
     css: styles.css
 ---
 
-![The Little Prince, first edition — Image © Antoine de Saint-Exupéry estate](media_pics/the-little-prince-antoine-de-saint-exupery-first-edition-rare.webp){width="250px" fig-align="center"}
 
 # Hello there.
 
 Welcome to my personal website.
 
-My name is Lourenço Xavier (pronounced Low-rén-sso Shaviér). I am a current candidate for a bachelor’s degree in **Mathematics** and **Economics**, with a minor in **Data Science**. I am tremendously passionate about **statistical storytelling**, numbers, and good food. You can often find me reading the news, strolling around, and studying. Outside of my main occupation, I am an **avid** cook, and I love **learning** history and geography.
+Here is my [résumé](media_pics/Lourenco_Xavier_CV.pdf).
 
-The lovely being to your left is none other than Tininha, my family's cat.
+My name is Lourenço Xavier (pronounced Low-rén-sso Shaviér). I am a current candidate for a bachelor’s degree in **Mathematics** and **Economics** at [Pitzer College](https://www.pitzer.edu/). My main research interest area is Environmental Economics, more specifically, valuation of ecosystem services, efficiency of resource preservation methods and the study of behavioral and policy interventions that improve environmental outcomes.
+
+My academic advisers are [Linus Yamane, Ph.D](https://www.pitzer.edu/linus-yamane), [Shriya Nagpal, Ph.D](https://www.pitzer.edu/shriya-nagpal) and [Laura Grant, Ph.D](https://www.cmc.edu/academic/faculty/profile/laura-grant).
+
+
