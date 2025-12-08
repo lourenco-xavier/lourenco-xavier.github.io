@@ -63,9 +63,21 @@ execute:
 
 ---
 
-[![](media_pics/dutch_scandal.png){fig-align="center" width="433"}](https://equineteurope.org/netherlands-institute-for-human-rights-role-in-the-investigation-of-the-childcare-allowance-scandal/)
+:::: {.columns}
 
-![Image source: Equinet Europe (Netherlands Institute for Human Rights) https://equineteurope.org/netherlands-institute-for-human-rights-role-in-the-investigation-of-the-childcare-allowance-scandal/](media_pics/dutch_scandal_2.png){fig-align="center" width="500"}
+::: {.column width="50%"}
+![](media_pics/dutch_scandal.png){fig-align="center" width="433"}
+
+**Image source:** Netherlands Institute for Human Rights, via Equinet Europe.
+:::
+
+::: {.column width="50%"}
+![](media_pics/dutch_scandal_2.png){fig-align="center" width="500"}
+
+**Image source:** Netherlands Institute for Human Rights (Equinet Europe).
+:::
+
+::::
 
 ---
 
