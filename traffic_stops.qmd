@@ -29,7 +29,7 @@ con_traffic <- DBI::dbConnect(
   password = Sys.getenv("TRAFFIC_PWD")
 )
 ```
-
+First, we print a list of all available tables in this data set so we can choose which ones to analyse
 ```{r}
 DBI::dbListTables(con_traffic)
 ```
@@ -66,146 +66,109 @@ DESCRIBE or_statewide_2020_04_01
 DESCRIBE wa_statewide_2020_04_01
 ```
 
-With all of this information, we now need to join these 3 tables so we can do our west coast analysis.
+With all of this information, we now need to union these 3 tables so we can do our west coast analysis.
 ```{sql}
 #| connection: con_traffic
 #| output.var: ca_or_wa_weekday
-  SELECT
-      'California' AS state,
-      DAYOFWEEK(date) AS weekday,
-      COUNT(*) AS total_stops
-  FROM ca_statewide_2023_01_26
-  WHERE type = 'vehicular'
-  GROUP BY state, DAYOFWEEK(date)
 
-  UNION ALL
+SELECT 'California' AS state,
+       DAYOFWEEK(date) AS weekday,
+       COUNT(*) AS total_stops
+FROM ca_statewide_2023_01_26
+WHERE type = 'vehicular'
+GROUP BY weekday
 
-  SELECT
-      'Oregon' AS state,
-      DAYOFWEEK(date) AS weekday,
-      COUNT(*) AS total_stops
-  FROM or_statewide_2020_04_01
-  WHERE type = 'vehicular'
-  GROUP BY state, DAYOFWEEK(date)
+UNION ALL
+SELECT 'Oregon',
+       DAYOFWEEK(date),
+       COUNT(*)
+FROM or_statewide_2020_04_01
+WHERE type = 'vehicular'
+GROUP BY DAYOFWEEK(date)
 
-  UNION ALL
+UNION ALL
+SELECT 'Washington',
+       DAYOFWEEK(date),
+       COUNT(*)
+FROM wa_statewide_2020_04_01
+WHERE type = 'vehicular'
+GROUP BY DAYOFWEEK(date)
 
-  SELECT
-      'Washington' AS state,
-      DAYOFWEEK(date) AS weekday,
-      COUNT(*) AS total_stops
-  FROM wa_statewide_2020_04_01
-  WHERE type = 'vehicular'
-  GROUP BY state, DAYOFWEEK(date)
-
-  ORDER BY weekday, state;
+ORDER BY weekday, state;
 ```
 
 Now, we can plot this information!
 ```{r, warning=FALSE, message=FALSE}
-#| echo: true
-#| message: false
-#| warning: false
 library(ggplot2)
 
-ggplot(
-  ca_or_wa_weekday,
-  aes(x = weekday, y = total_stops, color = state, group = state)
-) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 2) +
-  scale_x_continuous(breaks = 1:7)+
+ggplot(ca_or_wa_weekday, aes(weekday, total_stops, color = state)) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(breaks = 1:7,
+                     labels = c("Sun","Mon","Tue","Wed","Thu","Fri","Sat")) +
   labs(
     title = "Traffic Stops by Day of Week (CA, OR, WA)",
-        subtitle = "1 = Sun, 2 = Mon, 3 = Tue, 4 = Wed, 5 = Thu, 6 = Fri, 7 = Sat",
-    x = "Day of Week",
-    y = "Total Stops",
-    color = "State"
+    x = "Day",
+    y = "Stops"
   )
 ```
+
 As expected (and this is true for all states considered), out of all weekdays, Friday has the highest traffic stops by enforcement agents. This might be because people drive more on Fridays since not only do they go to work, but also go home and then go to other places for leisure. It is hard to say that there is a similar trend going on the other way that is true for all states though (meaning, the day of the week with the lowest traffic stops by enforcement agents!) as there is more variability in this scenario.
 
 
-Now that we have information on the days of the week, let's be even more precise: what are the most common violations that happen during fridays across these states? Unfortunately, the variable "violations" is only present in the tables for Washignton and California, so we can't use Oregon here.
+Now that we have information on the days of the week, let's be even more precise: what are the most common violations that happen during fridays across these states? Unfortunately, the variable "violations" is only present in the tables for Washignton and California, so we can't use Oregon here. Furthermore, combining Washington and California keeps crashing my computer, so let's focus on just California instead!
 
-First, we need to once more join the tables.
+First, we need to once more union the tables and also find the top 5 violations on fridays.
 
 ```{sql}
 #| connection: con_traffic
 #| output.var: friday_violations
-  SELECT
-      state,
-      violation,
-      COUNT(*) AS total_violations
-  FROM (
-      SELECT 
-          'California' AS state,
-          violation,
-          date
-      FROM ca_statewide_2023_01_26
-      WHERE violation IS NOT NULL 
 
-      UNION ALL
-
-      SELECT 
-          'Washington' AS state,
-          violation,
-          date
-      FROM wa_statewide_2020_04_01
-      WHERE violation IS NOT NULL 
-  ) AS combined
-  WHERE DAYOFWEEK(date) = 6
-  GROUP BY state, violation
-  ORDER BY state, total_violations DESC;
-```
-
-Creating the top 5 violations:
-```{r}
-top5_friday_violations <- friday_violations |>
-  group_by(state) |>
-  arrange(desc(total_violations)) |>
-  slice_head(n = 5)
+SELECT
+    'California' AS state,
+    violation,
+    COUNT(*) AS total_violations
+FROM ca_statewide_2023_01_26
+WHERE violation IS NOT NULL
+  AND DAYOFWEEK(date) = 6
+GROUP BY violation
+ORDER BY total_violations DESC
+LIMIT 0,5;
 ```
 
 Now plotting!
 ```{r}
 #| echo: true
 #| message: false
-#| warning: false
 library(dplyr)
 library(ggplot2)
-
-ordered_df <- top5_friday_violations |>
+ordered_df <- friday_violations |>
   mutate(
-    state = factor(state, levels = c("California", "Washington")),
     violation = reorder(violation, total_violations)
   )
+
 ggplot(
   ordered_df,
   aes(
     x = total_violations,
-    y = violation,
-    fill = state
+    y = violation
   )
 ) +
-  geom_col(position = "dodge") +
+  geom_col(fill = "red") +
   labs(
-    title = "Top 5 friday violations by state (CA and WA)",
+    title = "Top 5 Friday Violations in California",
     x = "Total Violations",
-    y = "Violation",
-    fill = "State"
-  ) 
+    y = "Violation"
+  )
 ```
-In both states, speed-related violations seem to be the most common, although California dominates it by far (possibly and substantially because of its much greater population). I would suppose part of the reason why however, in both states, speed-related violations are most common are in part because of people going to party at night and other forms of leisure. These factors can lead to more aggressive driving, higher average speeds, and therefore a greater frequency of speed-related stops. Another thing that was interesting to me is the difference in the types of violations between both states: California's traffic violations seem to be of a more severe/of safety concern reason, whilst for Washington it has to do more with procedural violations (like not having your seatbelt on or your vehicle license!)
+In California, speed-related violations seem to be the most common. I would suppose part of the reason why however speed-related violations are most common are in part because of people going to party at night and other forms of leisure. These factors can lead to more aggressive driving, higher average speeds, and therefore a greater frequency of speed-related stops. 
 
 
+To wrap up this project, let's summarize what I did. I used SQL to query traffic data in all west coast states (not if you consider Alaska to be one though!). After doing this I summarized vehicular stops by traffic agents by the day of the week across all three states, and found that across them Fridays are the days with the highest vehicular stops by traffic aggents. Then, given the lack of data for Oregon, I focused on the most common violations that occurred in Fridays in  California, and noticed that the violations in California seem to be of a more safety-concern cause than in Washington, where a lot of violations were associated with procedural violations.
 
-To wrap up this project, let's summarize what I did. I used SQL to query traffic data in all west coast states (not if you consider Alaska to be one though!). After doing this I summarized vehicular stops by traffic agents by the day of the week across all three states, and found that across them Fridays are the days with the highest vehicular stops by traffic aggents. Then, given the lack of data for Oregon, I focused on the most common violations that occurred in Fridays in both California and Washington, and noticed that the violations in California seem to be of a more safety-concern cause than in Washington, where a lot of violations were associated with procedural violations.
 ```{r}
-dbDisconnect(con_traffic)
+dbDisconnect(con_traffic, shutdown=TRUE)
 ```
-
-
 
 *References*
 
