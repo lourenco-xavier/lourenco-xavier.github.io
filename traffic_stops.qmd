@@ -164,7 +164,7 @@ ggplot(
 In California, speed-related violations seem to be the most common. I would suppose part of the reason why however speed-related violations are most common are in part because of people going to party at night and other forms of leisure. These factors can lead to more aggressive driving, higher average speeds, and therefore a greater frequency of speed-related stops. 
 
 
-To wrap up this project, let's summarize what I did. I used SQL to query traffic data in all west coast states (not if you consider Alaska to be one though!). After doing this I summarized vehicular stops by traffic agents by the day of the week across all three states, and found that across them Fridays are the days with the highest vehicular stops by traffic aggents. Then, given the lack of data for Oregon, I focused on the most common violations that occurred in Fridays in  California, and noticed that the violations in California seem to be of a more safety-concern cause than in Washington, where a lot of violations were associated with procedural violations.
+To wrap up this project, let's summarize what I did. I used SQL to query traffic data in all west coast states (not if you consider Alaska to be one though!). After doing this I summarized vehicular stops by traffic agents by the day of the week across all three states, and found that fridays are the days with the highest vehicular stops by traffic agents. Then, I focused on the most common violations that occurred in Fridays in  California, and noticed that the violations in California seem to be of a more safety-concern cause than in Washington, where a lot of violations were associated with procedural violations.
 
 ```{r}
 dbDisconnect(con_traffic, shutdown=TRUE)
