@@ -18,10 +18,12 @@ website:
             href: eurovision.qmd
           - text: "New York Times headlines"
             href: newyorktimes.qmd
-          - text: "Room with an Ocean view"
+          - text: "Room draw"
             href: ocean_view.qmd
           - text: "Dutch childcare benefits scandal"
             href: dutch_data_ethics.qmd
+          - text: "Dutch childcare benefits presentation"
+            href: ds_presentation.qmd
           - text: "Traffic Stops"
             href: traffic_stops.qmd
 
