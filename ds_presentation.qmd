@@ -40,26 +40,6 @@ execute:
 -   Sensitive traits (e.g., nationality, dual citizenship) used in scoring
 -   Dutch Data Protection Authority (2020): **illegal processing** + bias
 
----
-
-## Who was targeted?
-
--   Applicants = primarily **low-income parents**
--   Algorithm disproportionately flagged:
-    -   People with immigrant backgrounds\
-    -   Dual citizens\
-    -   Women\
--   These groups were **not** representative of fraud risk\
--   Result: systemic discrimination + severe social and financial harm
-
----
-
-## Who was measured?
-
--   Program targeted **low-income parents and caregivers**
--   These applicants were representative of the program’s population\
--   But algorithmic predictions **did not generalize** to fraud risk\
--   Result: unfair targeting of the very group the system was meant to help
 
 ---
 
@@ -91,16 +71,6 @@ execute:
     -   Mental stress
     -   Family instability\
 -   Nationality became a **proxy for “fraud risk”** → systemic bias
-
----
-
-## Unintended uses of the data
-
--   Data originally collected to **support families**
--   Reframed as part of “tough on fraud” policy\
--   Algorithm punished marginalized families instead of protecting them\
--   Sparked public outrage + parliamentary investigation\
--   **Helped trigger collapse of Dutch government (2021)**
 
 ---
 
