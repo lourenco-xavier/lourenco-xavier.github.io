@@ -88,7 +88,7 @@
     "href": "ds_presentation.html#what-happened",
     "title": "Dutch childcare benefits scandal",
     "section": "What happened?",
-    "text": "What happened?\n\nChildcare allowance helps parents pay for licensed childcare\n\n\nDutch Tax Authority introduced an automated risk-scoring system\n\nSystem disproportionately flagged minorities\n“High-risk” cases treated as fraud with little/no human review\n\nInnocent families fined, lost benefits, pushed into debt\n\nScandal contributed to fall of Dutch government (2021)"
+    "text": "What happened?\n\n“High-risk” cases treated as fraud with little/no human review\nInnocent families fined, lost benefits, pushed into debt\n\n26,000 innocent people accused + faced heavy consequences:\n\nHad to pay bank subsidies & lost subsidy elegibility\nLost jobs, houses;\nLost access to banking services\nPeople died by suicide and hundreds of families were broken\n\n\nScandal contributed to fall of Dutch government (2021)"
   },
   {
     "objectID": "ds_presentation.html#what-went-wrong-with-the-data",
@@ -109,7 +109,7 @@
     "href": "ds_presentation.html#was-the-data-used-legally",
     "title": "Dutch childcare benefits scandal",
     "section": "Was the data used legally?",
-    "text": "Was the data used legally?\n\nApplicants provided data (income, job, nationality, childcare provider)\nCollection was legal only for calculating eligibility/benefits\nTax Authority repurposed data for fraud detection\nSensitive traits (e.g., nationality, dual citizenship) used in scoring\nDutch Data Protection Authority (2020): illegal processing + bias"
+    "text": "Was the data used legally?\n\nApplicants provided data (income, job, nationality, childcare provider)\nCollection was legal only for calculating eligibility/benefits\nTax Authority repurposed data for fraud detection\nSensitive traits (e.g., nationality, dual citizenship) used in scoring\nDutch Data Protection Authority (2020): illegal processing + bias\n\nIllegal under the dutch constitution"
   },
   {
     "objectID": "ds_presentation.html#who-was-measured",
@@ -123,7 +123,7 @@
     "href": "ds_presentation.html#should-race-or-nationality-be-used",
     "title": "Dutch childcare benefits scandal",
     "section": "Should race or nationality be used?",
-    "text": "Should race or nationality be used?\n\nNo evidence linking immigration background to fraud\n\nUsing these traits reinforces historical discrimination\n\nVulnerable families forced into:\n\nDebt\nEviction\nMental stress\nFamily instability\n\n\nNationality became a proxy for “fraud risk” → systemic bias"
+    "text": "Should race or nationality be used?\n\nNo evidence linking immigration background to fraud\n\nUsing these traits reinforces historical discrimination\n\nVulnerable families forced into:\n\nDebt\nEviction\nMental stress\nFamily instability\n\nNationality became a proxy for “fraud risk” → systemic bias"
   },
   {
     "objectID": "ds_presentation.html#unintended-uses-of-the-data",
@@ -145,5 +145,12 @@
     "title": "Dutch childcare benefits scandal",
     "section": "References",
     "text": "References\nAlexander Hoogenboom. (2022, November 2). Dutch Childcare Allowance Scandal: The importance of investigation powers. Equinet. (https://equineteurope.org/netherlands-institute-for-human-rights-role-in-the-investigation-of-the-childcare-allowance-scandal/)\nAmnesty International. (2021, October 25). Dutch childcare benefit scandal an urgent wake-up call to ban racist algorithms. (https://www.amnesty.org/en/latest/news/2021/10/xenophobic-machines-dutch-child-benefit-scandal/)"
+  },
+  {
+    "objectID": "ds_presentation.html#overview-kinderopvangtoeslag",
+    "href": "ds_presentation.html#overview-kinderopvangtoeslag",
+    "title": "Dutch childcare benefits scandal",
+    "section": "Overview: kinderopvangtoeslag",
+    "text": "Overview: kinderopvangtoeslag\n\nChildcare allowance helps parents pay for licensed childcare\nProgram supported hundreds of thousands of families each year\nCouple of fraudlant cases generated public outcry\n\nDutch Tax Authority introduced an automated risk-scoring system\n\nSystem disproportionately flagged minorities"
   }
 ]

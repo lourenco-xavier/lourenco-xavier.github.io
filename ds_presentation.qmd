@@ -14,21 +14,30 @@ execute:
   message: false
 ---
 
----
+## Overview: kinderopvangtoeslag
 
-## What happened?
+- Childcare allowance helps parents pay for licensed childcare
 
--   Childcare allowance helps parents pay for licensed childcare\
+- Program supported hundreds of thousands of families each year
+
+- Couple of fraudlant cases generated public outcry
+
     -   Dutch Tax Authority introduced an automated **risk-scoring** system\
 
     -   System disproportionately flagged minorities
 
-    -   “High-risk” cases treated as fraud with **little/no human review\
-        **
+---
 
-    -   Innocent families fined, lost benefits, pushed into debt\
+## What happened?
 
-    -   Scandal contributed to fall of Dutch government (2021)
+- “High-risk” cases treated as fraud with **little/no human review**
+- Innocent families fined, lost benefits, pushed into debt
+    - 26,000 innocent people accused + faced heavy consequences:
+        - Had to pay bank subsidies & lost subsidy elegibility
+        - Lost jobs, houses;
+        - Lost access to banking services 
+        - People died by suicide and hundreds of families were broken
+- Scandal contributed to fall of Dutch government (2021)
 
 ---
 
@@ -39,7 +48,7 @@ execute:
 -   Tax Authority repurposed data for **fraud detection**
 -   Sensitive traits (e.g., nationality, dual citizenship) used in scoring
 -   Dutch Data Protection Authority (2020): **illegal processing** + bias
-
+    -  Illegal under the dutch constitution
 
 ---
 
@@ -69,7 +78,7 @@ execute:
     -   Debt
     -   Eviction
     -   Mental stress
-    -   Family instability\
+    -   Family instability
 -   Nationality became a **proxy for “fraud risk”** → systemic bias
 
 ---
@@ -88,6 +97,7 @@ execute:
 ---
 
 ## References
+
 
 Alexander Hoogenboom. (2022, November 2). Dutch Childcare Allowance Scandal: The importance of investigation powers. Equinet. (https://equineteurope.org/netherlands-institute-for-human-rights-role-in-the-investigation-of-the-childcare-allowance-scandal/)
 
