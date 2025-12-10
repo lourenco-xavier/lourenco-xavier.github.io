@@ -22,7 +22,7 @@ format:
 
 Welcome to my personal website.
 
-Here is my [résumé](media_pics/Lourenco_Xavier_CV.pdf).
+Here is my [CV](media_pics/Lourenco_Xavier_CV.pdf).
 
 My name is Lourenço Xavier (pronounced Low-rén-sso Shaviér). I am a current candidate for a bachelor’s degree in **Mathematics** and **Economics** at [Pitzer College](https://www.pitzer.edu/). My main research interest area is Environmental Economics, more specifically, valuation of ecosystem services, efficiency of resource preservation methods and the study of behavioral and policy interventions that improve environmental outcomes.
 
